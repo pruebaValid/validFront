@@ -1,0 +1,89 @@
+<div class="container">
+    <app-navbar></app-navbar>
+    <div class="container-flui">
+        <div>
+            <div>
+                <div class="card">
+                    <div class="card-header ">
+                        <h4 class="card-title">Datos del usuario</h4>
+                    </div>
+                    <form>
+                        <div class="card-body">
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="nombre" name="nombre" id="nombre" type="text" [(ngModel)]="usuarioModel.nombre">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="apellido" type="text" name="apellido" [(ngModel)]="usuarioModel.apellido">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <br>
+                            <button mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="saveUsuario()">Guardar Usuario</button>
+
+
+                        </div>
+
+
+                    </form>
+                    <br>
+                    <form>
+                        <div>
+
+                            <table mat-table [dataSource]="dataSource">
+
+
+                                <ng-container matColumnDef="id">
+                                    <th mat-header-cell *matHeaderCellDef> No. </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="nombre">
+                                    <th mat-header-cell *matHeaderCellDef> nombre </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="apellido">
+                                    <th mat-header-cell *matHeaderCellDef> apellido </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.apellido}} </td>
+                                </ng-container>
+
+
+                                <ng-container matColumnDef="procesado">
+                                    <th mat-header-cell *matHeaderCellDef> procesado </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.procesado}} </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="select">
+                                    <th mat-header-cell *matHeaderCellDef>
+                                        <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+                                        </mat-checkbox>
+                                    </th>
+                                    <td mat-cell *matCellDef="let row">
+                                        <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+                                        </mat-checkbox>
+                                    </td>
+                                </ng-container>
+
+                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                            </table>
+
+                            <br>
+                            <div class="card-body">
+                                <button mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="cambiarEstado()">Procesar</button>
+                            </div>
+                        </div>
+
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
